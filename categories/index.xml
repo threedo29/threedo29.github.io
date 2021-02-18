@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Do Do Do</title>
+    <link>https://threedo29.github.io/categories/</link>
+    <description>Recent content in Categories on Do Do Do</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko</language>
+    <lastBuildDate>Thu, 18 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://threedo29.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Embedded</title>
+      <link>https://threedo29.github.io/categories/embedded/</link>
+      <pubDate>Thu, 18 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://threedo29.github.io/categories/embedded/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>프로그래밍</title>
+      <link>https://threedo29.github.io/categories/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://threedo29.github.io/categories/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C/</guid>
+      <description>Communication MCU의 통신 시리얼 인터페이스의 종류</description>
+    </item>
+    
+    <item>
+      <title>프로그래밍</title>
+      <link>https://threedo29.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://threedo29.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/</guid>
+      <description>21세기에 컴퓨터를 다룰 줄 안다는 것은 인터넷을 본다거나 문서작성을 할 수 있다는 뜻이 아니라 컴퓨터에게 명령을 내리고 반복되는 작업을 줄여서 생산성을 높일 줄 안다는 것―다시 말해 프로그래밍을 할줄 안다는 것이다. 다만 생새우초밥집에서는 개발자를 위한 블로그가 아니므로 자세한 이론보단 간단한 팁 위주로 다룬다. theory 프로그래밍에서의 타입 프로그래</description>
+    </item>
+    
+  </channel>
+</rss>

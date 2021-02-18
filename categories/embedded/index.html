@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko" class = "blog">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-NWJZ3RR"></script>
+
+    
+    <meta name="NaverBot" content="All"/>
+    <meta name="NaverBot" content="index,follow"/>
+    <meta name="Yeti" content="All"/>
+    <meta name="Yeti" content="index,follow"/>
+
+    
+    
+    <link href=https://threedo29.github.io/css/custum.css rel="preload" as="style" onload="this.rel='stylesheet'">
+    <link href=https://threedo29.github.io/css/comment.css rel="preload" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel='stylesheet' href= https://threedo29.github.io/css/custum.css></noscript>
+
+    
+    <link rel="canonical" href="https://threedo29.github.io/">
+
+    
+    <link rel="icon" href="https://threedo29.github.io/logo/favicon.ico">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="logo/basic.png">
+    
+    
+    
+
+    
+    
+    
+    
+    <script type="text/javascript" src=https://threedo29.github.io/js/jquery-3.5.1.min.js></script>
+
+    
+    
+
+    <title>Embedded</title>
+
+</head>
+
+    <body class="main">
+    <header>
+    <a href="../../" rel="home">
+        <p style="text-align:center; font-size: 1rem; color: black;">
+            Do Do Do
+        </p>
+    </a>
+</header>
+
+    <div id="fastSearch">
+    <input id="searchInput" tabindex="0">
+    <ul id="searchResults">
+    </ul>
+  </div>
+  <script src="../../js/fuse.js"></script> 
+  <script src="../../js/fastsearch.js"></script>
+    <div class="mobile_search">
+    <div class="search_box">
+        <input type="text" tabindex="0" name="text" value="" placeholder="검색 내용">
+    </div>
+    <ul id="searchResultsMobile"></ul>
+</div>
+
+<script>
+    var firstRun = true;
+    var mobile_search = $('.mobile_search');
+    var fuse_mobile;
+    var list_mobile = document.getElementById('searchResultsMobile');
+    var first_mobile = list_mobile.firstChild;
+    var last_mobile = list_mobile.lastChild;
+    var resultsAvailable_mobile = false;
+
+    function fetchJSONFileMobile(path, callback) {
+        var httpRequest = new XMLHttpRequest();
+        httpRequest.onreadystatechange = function () {
+            if (httpRequest.readyState === 4) {
+                if (httpRequest.status === 200) {
+                    var data = JSON.parse(httpRequest.responseText);
+                    if (callback) callback(data);
+                }
+            }
+        };
+        httpRequest.open('GET', path);
+        httpRequest.send();
+    }
+
+    function loadSearchMobile() {
+        fetchJSONFileMobile('/index.json', function (data) {
+            var options = {
+                shouldSort: true,
+                location: 0,
+                distance: 100,
+                threshold: 0.4,
+                minMatchCharLength: 2,
+                keys: [
+                    'title',
+                    'permalink',
+                    'summary'
+                ]
+            };
+            fuse_mobile = new Fuse(data, options);
+        });
+    }
+    
+    function executeSearchMobile(term) {
+        let results = fuse_mobile.search(term);
+        let searchitems = '';
+
+        if (results.length === 0) {
+            mobile_search.css({
+                'height': '30px',
+                'overflow': 'hidden'
+            });
+            resultsAvailable_mobile = false;
+            searchitems = '';
+        } else {
+            mobile_search.css({
+                'height': '200px',
+                'overflow': 'auto'
+            });
+            for (let item in results.slice(0, 100)) {
+                searchitems = searchitems + '<li><a href="' + results[item].item.permalink + '" tabindex="0">' + '<span class="title">' + results[item].item.title + '</span></a></li>';
+            }
+            resultsAvailable_mobile = true;
+        }
+
+        document.getElementById("searchResultsMobile").innerHTML = searchitems;
+        if (results.length > 0) {
+            first_mobile = list_mobile.firstChild.firstElementChild;
+            last_mobile = list_mobile.lastChild.firstElementChild;
+        }
+    }
+    $(document).ready(function() {
+        
+        var isMobile = false;
+        
+        var filter = "win16|win32|win64|mac";
+        
+        if (navigator.platform) {
+            isMobile = filter.indexOf(navigator.platform.toLowerCase()) < 0;
+        }
+
+        if (isMobile) {
+        
+        } else { 
+            $('.mobile_search').css('display', 'none');
+        }
+
+        $('.search_box input').focus(function() {
+            if (firstRun) {
+                loadSearchMobile();
+                firstRun = false;
+            }
+        });
+
+        $('.search_box input').blur(function() {
+            
+        });
+
+        $('.search_box input').keyup(function() {
+            let term = $('.search_box input').val();
+            executeSearchMobile(term);
+        });
+    });
+</script>
+    <hr>
+        
+        <div class = "wrapper">
+
+            <div class = "content">
+            
+<h1>Embedded</h1>
+
+<aside>
+    <b>목차</b>
+    
+</aside>
+
+
+
+
+<details open>
+
+    <summary>전체 포스트</summary>
+<ul>
+
+    <li><a href="https://threedo29.github.io/posts/serial-communication/">MCU 통신</a></li>
+
+</ul>
+</details>
+
+
+            </div>
+
+            <div class = "sidebar">
+
+            
+<aside>
+    <p><b>카테고리</b></p>
+    
+        <summary>전체 포스트 (1)</summary>
+        <ul><li>
+                <a class = "in_sidebar" href="https://threedo29.github.io/categories/embedded/" style="color: black">Embedded (1)</a>
+            </li>
+        </ul>
+    
+</aside>
+            </div>
+
+        </div>
+    </body>
+
+    <hr>
+    <footer>
+    <aside>
+        <div>
+            <p style="text-align: center">© Do Do Do / Powered by <a href="https://gohugo.io" target="_blank">Hugo</a></p>
+            <p style="text-align: center"><img src=https://threedo29.github.io/logo/gmail.png width=16px> Contact: threedo29@gmail.com</p>
+        </div>
+
+    
+    <script async='async' src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML,Safe' type='text/javascript'>
+	MathJax.Hub.Config({
+		messageStyle: "none",
+		jax: ["input/TeX", "output/HTML-CSS"],
+		"HTML-CSS": { availableFonts: ["TeX"] },
+		extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+
+		tex2jax: {
+			inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+			displayMath: [ ['$$','$$'], ["\\(","\\)"] ],
+			displayAlign: "left"
+		},
+		
+		TeX: { equationNumbers: {autoNumber: "AMS"}, 
+					extensions: ["cancel.js","color.js"], 
+					   TagSide: "left" 
+		}
+					
+	});
+</script> 
+
+    
+    
+    
+    </aside>
+</footer>
+</html>
+<!DOCTYPE html>
