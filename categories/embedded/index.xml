@@ -6,7 +6,16 @@
     <description>Recent content in Embedded on Do Do Do</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language>
-    <lastBuildDate>Thu, 18 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://threedo29.github.io/categories/embedded/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 19 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://threedo29.github.io/categories/embedded/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>시리얼 인터페이스의 종류</title>
+      <link>https://threedo29.github.io/posts/kind-of-serial-interface/</link>
+      <pubDate>Fri, 19 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://threedo29.github.io/posts/kind-of-serial-interface/</guid>
+      <description>시리얼 인터페이스의 종류 (동기식/비동기식) 동기식(Synchronous) 시리얼 인터페이스 데이터 라인(Data Line)의 동작을 클럭 시그널(Clock Signal)의 동작과 동기화(같은 타이밍에 동작)시킨다. 시리얼 버스에 함께 연결된 장치들이 이 클럭 신호를 공유하게 되어 모두 신호에 맞춰 동작하게 된다. (두 대의 송수</description>
+    </item>
+    
     <item>
       <title>MCU 통신</title>
       <link>https://threedo29.github.io/posts/serial-communication/</link>

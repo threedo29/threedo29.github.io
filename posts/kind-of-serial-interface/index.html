@@ -40,13 +40,13 @@
     
     
 
-    <title>Archives</title>
+    <title>시리얼 인터페이스의 종류</title>
 
 </head>
 
     <body class="main">
     <header>
-    <a href="../" rel="home">
+    <a href="../../" rel="home">
         <p style="text-align:center; font-size: 1rem; color: black;">
             Do Do Do
         </p>
@@ -58,8 +58,8 @@
     <ul id="searchResults">
     </ul>
   </div>
-  <script src="../js/fuse.js"></script> 
-  <script src="../js/fastsearch.js"></script>
+  <script src="../../js/fuse.js"></script> 
+  <script src="../../js/fastsearch.js"></script>
     <div class="mobile_search">
     <div class="search_box">
         <input type="text" tabindex="0" name="text" value="" placeholder="검색 내용">
@@ -175,23 +175,66 @@
 
             <div class = "content">
             
-<h1>Archives</h1>
+
+<title>시리얼 인터페이스의 종류</title>
+
+<h1>시리얼 인터페이스의 종류</h1>
+<aside>
+    <p style="text-align: right;">
+        2
+
+    
+    
+            <a href="https://threedo29.github.io/categories/embedded/" style="color: black">Embedded</a>&emsp;
+            
+    </span>
+    
+    작성일: 2021-02-19&nbsp;<br>
+    작성자: 양성재 &nbsp;
+</p>
+</aside>
 
 <aside>
     <b>목차</b>
-    
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#시리얼-인터페이스의-종류-동기식비동기식">시리얼 인터페이스의 종류 (동기식/비동기식)</a>
+      <ul>
+        <li><a href="#동기식synchronous-시리얼-인터페이스">동기식(Synchronous) 시리얼 인터페이스</a></li>
+        <li><a href="#비동기식asynchronous-시리얼-인터페이스">비동기식(Asynchronous) 시리얼 인터페이스</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 </aside>
 
-
-
-
-<details open>
-
-    <summary>전체 포스트</summary>
+<h2 id="시리얼-인터페이스의-종류-동기식비동기식">시리얼 인터페이스의 종류 (동기식/비동기식)</h2>
+<h3 id="동기식synchronous-시리얼-인터페이스">동기식(Synchronous) 시리얼 인터페이스</h3>
 <ul>
-
+<li>데이터 라인(Data Line)의 동작을 클럭 시그널(Clock Signal)의 동작과 동기화(같은 타이밍에 동작)시킨다.</li>
+<li>시리얼 버스에 함께 연결된 장치들이 이 클럭 신호를 공유하게 되어 모두 신호에 맞춰 동작하게 된다. (두 대의 송수신 시스템이 통신과정에서 시차가 달라 데이터를 잘못 해석할 가능성을 방지)</li>
+<li><u>통신에 관여하는 주체들 간에 주종 관계가 존재</u> (<strong><code>master</code></strong> : 통신의 주도권을 가지는 주체, <strong><code>slave</code></strong> : 통신에서 종속적인 주체) 따라서 master가 출력하는 클럭 신호에만 반응할 수 있으므로 송수신과 상관 없이 master가 통신을 주도 (보통 프로세서 : master, 주변장치 : slave)</li>
+<li>장점 : 직관적이다, 전송효율과 전송속도가 높다.</li>
+<li>단점 : 클럭 신호를 위한 하나의 라인을 더 필요로 한다.</li>
 </ul>
-</details>
+<h3 id="비동기식asynchronous-시리얼-인터페이스">비동기식(Asynchronous) 시리얼 인터페이스</h3>
+<ul>
+<li>데이터가 외부 클럭 시그널(external clock signal)의 도움 없이 동작하는 것을 의미</li>
+<li>대신 클럭 신호 없이 데이터를 안정적으로 전송, 수신할 수 있는 방법이 추가된다.<br>
+→ 하나의 글자를 나타내는 코드의 전후에 <strong><code>start bit</code></strong> 와 <strong><code>stop bit</code></strong> 를 넣어 블록의 동기화를 취해준다.</li>
+<li>일반적으로 시리얼 통신이라 부르는 것들 대부분 비동기 시리얼 통신을 사용</li>
+<li>장점 :
+<ol>
+<li>비동기 통신은 클럭 신호를 위한 라인을 필요로 하지 않는다.</li>
+<li>송신용 선과 수신용 선 두 가닥만 존재하여 두 주체가 동시에 데이터를 주고 받는 양방향 통신인 <u><strong><code>전이중(full duplex)통신</code></strong> 이 가능하다.</u></li>
+<li>통신에 참여하는 두 주체가 서로 대등한 관계에서 일대일 통신 : <u>양쪽 모두 원하는 때에 <strong>언제든지</strong> 데이터를 보낼 수 있다.</u></li>
+</ol>
+</li>
+<li>단점 : 추가된 <code>start bit</code>와 <code>stop bit</code>로 인해 필요한 데이터만 <u>연속적으로 보낼 수 없고</u> 적어도 10bit 이상 길이의 패킷을 전송해야 하므로 효율이 떨어진다.</li>
+</ul>
+<p><strong>표 1 동기식 전송과 비동기식 전송 비교</strong></p>
+<p><img src="compare_table.png#center" alt="compare_table"></p>
+
 
 
             </div>
