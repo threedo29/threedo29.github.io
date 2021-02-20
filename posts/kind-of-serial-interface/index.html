@@ -198,18 +198,14 @@
     <b>목차</b>
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#시리얼-인터페이스의-종류-동기식비동기식">시리얼 인터페이스의 종류 (동기식/비동기식)</a>
-      <ul>
-        <li><a href="#동기식synchronous-시리얼-인터페이스">동기식(Synchronous) 시리얼 인터페이스</a></li>
-        <li><a href="#비동기식asynchronous-시리얼-인터페이스">비동기식(Asynchronous) 시리얼 인터페이스</a></li>
-      </ul>
-    </li>
+    <li><a href="#동기식synchronous-시리얼-인터페이스">동기식(Synchronous) 시리얼 인터페이스</a></li>
+    <li><a href="#비동기식asynchronous-시리얼-인터페이스">비동기식(Asynchronous) 시리얼 인터페이스</a></li>
   </ul>
 </nav>
 </aside>
 
-<h2 id="시리얼-인터페이스의-종류-동기식비동기식">시리얼 인터페이스의 종류 (동기식/비동기식)</h2>
-<h3 id="동기식synchronous-시리얼-인터페이스">동기식(Synchronous) 시리얼 인터페이스</h3>
+<h1 id="시리얼-인터페이스의-종류-동기식비동기식">시리얼 인터페이스의 종류 (동기식/비동기식)</h1>
+<h2 id="동기식synchronous-시리얼-인터페이스">동기식(Synchronous) 시리얼 인터페이스</h2>
 <ul>
 <li>데이터 라인(Data Line)의 동작을 클럭 시그널(Clock Signal)의 동작과 동기화(같은 타이밍에 동작)시킨다.</li>
 <li>시리얼 버스에 함께 연결된 장치들이 이 클럭 신호를 공유하게 되어 모두 신호에 맞춰 동작하게 된다. (두 대의 송수신 시스템이 통신과정에서 시차가 달라 데이터를 잘못 해석할 가능성을 방지)</li>
@@ -217,7 +213,7 @@
 <li>장점 : 직관적이다, 전송효율과 전송속도가 높다.</li>
 <li>단점 : 클럭 신호를 위한 하나의 라인을 더 필요로 한다.</li>
 </ul>
-<h3 id="비동기식asynchronous-시리얼-인터페이스">비동기식(Asynchronous) 시리얼 인터페이스</h3>
+<h2 id="비동기식asynchronous-시리얼-인터페이스">비동기식(Asynchronous) 시리얼 인터페이스</h2>
 <ul>
 <li>데이터가 외부 클럭 시그널(external clock signal)의 도움 없이 동작하는 것을 의미</li>
 <li>대신 클럭 신호 없이 데이터를 안정적으로 전송, 수신할 수 있는 방법이 추가된다.<br>
@@ -232,8 +228,7 @@
 </li>
 <li>단점 : 추가된 <code>start bit</code>와 <code>stop bit</code>로 인해 필요한 데이터만 <u>연속적으로 보낼 수 없고</u> 적어도 10bit 이상 길이의 패킷을 전송해야 하므로 효율이 떨어진다.</li>
 </ul>
-<p><strong>표 1 동기식 전송과 비동기식 전송 비교</strong></p>
-<p><img src="compare_table.png#center" alt="compare_table"></p>
+<p><img src="compare_table.png#center" alt="compare_table"><strong>표 1 동기식 전송과 비동기식 전송 비교</strong></p>
 
 
 
@@ -245,9 +240,9 @@
 <aside>
     <p><b>카테고리</b></p>
     
-        <summary>전체 포스트 (2)</summary>
+        <summary>전체 포스트 (3)</summary>
         <ul><li>
-                <a class = "in_sidebar" href="https://threedo29.github.io/categories/embedded/" style="color: black">Embedded (2)</a>
+                <a class = "in_sidebar" href="https://threedo29.github.io/categories/embedded/" style="color: black">Embedded (3)</a>
             </li>
         </ul>
     

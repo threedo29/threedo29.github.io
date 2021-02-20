@@ -125,6 +125,11 @@ img[src$='#floatright'] {
     /* whatever else styles you fancy here */
 }
 
+img + em, img + strong {
+    display: block;
+    text-align: center;
+}
+
 /** sidebar 최근 댓글 START **/
 .current-reply {
     list-style-type: none;
