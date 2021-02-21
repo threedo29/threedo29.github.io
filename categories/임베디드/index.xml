@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>프로그래밍 on Do Do Do</title>
+    <title>Embedded on Do Do Do</title>
     <link>https://threedo29.github.io/categories/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C/</link>
-    <description>Recent content in 프로그래밍 on Do Do Do</description>
+    <description>Recent content in Embedded on Do Do Do</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language><atom:link href="https://threedo29.github.io/categories/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C/index.xml" rel="self" type="application/rss+xml" />
   </channel>

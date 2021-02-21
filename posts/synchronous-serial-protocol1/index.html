@@ -40,13 +40,13 @@
     
     
 
-    <title>Y_s</title>
+    <title>동기식 시리얼 통신 프로토콜1</title>
 
 </head>
 
     <body class="main">
     <header>
-    <a href="../" rel="home">
+    <a href="../../" rel="home">
         <p style="text-align:center; font-size: 1rem; color: black;">
             Do Do Do
         </p>
@@ -58,8 +58,8 @@
     <ul id="searchResults">
     </ul>
   </div>
-  <script src="../js/fuse.js"></script> 
-  <script src="../js/fastsearch.js"></script>
+  <script src="../../js/fuse.js"></script> 
+  <script src="../../js/fastsearch.js"></script>
     <div class="mobile_search">
     <div class="search_box">
         <input type="text" tabindex="0" name="text" value="" placeholder="검색 내용">
@@ -175,31 +175,93 @@
 
             <div class = "content">
             
-<h1>Y_s</h1>
+
+<title>동기식 시리얼 통신 프로토콜1</title>
+
+<h1>동기식 시리얼 통신 프로토콜1</h1>
+<aside>
+    <p style="text-align: right;">
+        4
+
+    
+    
+    작성일: 2021-02-21&nbsp;<br>
+    작성자: 양성재 &nbsp;
+</p>
+</aside>
 
 <aside>
     <b>목차</b>
-    
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#동기식-시리얼-통신-사용-효과">동기식 시리얼 통신 사용 효과</a></li>
+    <li><a href="#spi-데이터-수신">SPI 데이터 수신</a></li>
+    <li><a href="#slave-장치-선택">Slave 장치 선택</a></li>
+    <li><a href="#spi의-장점">SPI의 장점</a></li>
+    <li><a href="#spi의-단점">SPI의 단점</a></li>
+  </ul>
+</nav>
 </aside>
 
-
-
-
-<details open>
-
-    <summary>전체 포스트</summary>
+<h1 id="동기식-시리얼-통신-프로토콜----spi">동기식 시리얼 통신 프로토콜 ① - SPI</h1>
+<h2 id="동기식-시리얼-통신-사용-효과">동기식 시리얼 통신 사용 효과</h2>
 <ul>
-
-    <li><a href="https://threedo29.github.io/posts/serial-communication/">MCU 통신</a></li>
-
-    <li><a href="https://threedo29.github.io/posts/kind-of-serial-interface/">시리얼 인터페이스의 종류</a></li>
-
-    <li><a href="https://threedo29.github.io/posts/asynchronous-serial-protocol/">비동기식 시리얼 프로토콜</a></li>
-
-    <li><a href="https://threedo29.github.io/posts/synchronous-serial-protocol1/">동기식 시리얼 통신 프로토콜1</a></li>
-
+<li>비동기식 시리얼 통신의 주요 문제점 : 비동기식 시리얼 통신은 clock 신호를 사용하지 않기 때문에 통신 장치 간의 baud rate mismatch를 방지하기 위해서 데이터 패킷에 동기화 비트를 추가하게 된다.<br>
+→ 결국 1byte를 전송할 때마다 start/stop bit가 생성되고 전송시 마다 sync를 맞춰야 하므로 오버헤드가 발생하고 복잡한 하드웨어 컨트롤러가 필요하다.</li>
+<li>위의 동기식 통신의 주요 문제점을 해결하기 위해 동기식 시리얼 통신 프로토콜을 사용하게 된다.</li>
+<li>별도의 clock 라인을 공유함으로써 통신 참여자 끼리 데이터가 언제 들어오는지 알 수 없게 하는 방식 → <u>장치들 끼리 baud rate를 공유할 필요가 없으며 각 장치의 clock을 동일하게 유지해야 할 필요가 없다.</u></li>
 </ul>
-</details>
+<h2 id="spi-데이터-수신">SPI 데이터 수신</h2>
+<ul>
+<li>SPI(Serial Peripheral Interface)는 동기식 시리얼 통신이다.</li>
+<li>클럭 신호를 생성하는 장치 : master,<br>
+나머지 통신에 참가한 장치들 : slave<br>
+* Master가 Slave로부터 데이터를 수신할 때도 수신용 클럭 신호를 생성한다.</li>
+<li>클럭 신호를 이용하는 SPI는 1 : N 통신이 가능하므로 slave는 1개 이상의 장치가 될 수 있다.</li>
+<li>대부분 MCU가 master가 된다.</li>
+</ul>
+<p><img src="spi_cs.png#center" alt="spi_cs"><strong>그림 1 SPI 통신 Master, Slave 연결 라인과 데이터 전송</strong></p>
+<ul>
+<li>세 개의 라인이 통신에 사용 (MOSI, MISO, SCLK)
+<ul>
+<li>MOSI(Master Out / Slave In) 데이터 라인 : 데이터가 master에서 slave로 전달</li>
+<li>MISO(Master In / Slave Out) 데이터 라인 : 데이터가 slave에서 master로 전달</li>
+</ul>
+</li>
+<li>두 개의 데이터 라인의 존재로 인해 전이중(full duplex) 통신이 가능하다.</li>
+<li>UART 통신과는 달리 데이터를 송수신하기 위한 클럭 신호를 미리 생성시켜준다.(SCLK)<br>
+* 아무 대나 데이터 송수신이 가능한 UART에 비해 비효율적이지 않은가?<br>
+A) 특히 센서와 통신할 때 큰 문제가 되지 않는다. master에서 명령어를 전송하면 센섯는 자신이 전송할 데이터의 크기가 얼마인지 전달해주고 그에 따라 데이터 전체를 받기 위한 클럭 신호를 생성하게 된다.</li>
+</ul>
+<h2 id="slave-장치-선택">Slave 장치 선택</h2>
+<p><img src="spi_one_by_one.png#center" alt="spi_one_by_one"><strong>그림 2 SPI 통신 1 : 1 연결</strong></p>
+<ul>
+<li>각 slave 장치들은 Chip Enable (CE 또는 CS - Chip Select) 입력을 가지고 있으며 이 입력이 활성화 되었을 때만 동작한다.</li>
+<li>Master는 여러 개의 Slave Select (SS 또는 CS - Chip Select) 라인이 slave들의 Chip Enable과 연결되어 있다.</li>
+<li>데이터를 송신/수신 할 때 SS를 High에서 Low로 전환시켜 해당 slave를 활성화 시킨다. (active low)</li>
+<li>2개 이상의 slave와 연결되어 있을 때는 SS을 제어하는 통신할 SLAVE를 선택할 수 있다.</li>
+</ul>
+<p><img src="spi_one_by_n.png#center" alt="spi_one_by_n"><strong>그림 3 SPI 통신 1 : N</strong></p>
+<ul>
+<li>1 : N 연결에서는 SCLK, MOSI, MISO가 모든 master, slave에 각각 연결되어 공유된다.</li>
+<li>하지만 slave의 CS 신호는 서로 묶이지 않고 각각 다른 하나의 Master의 SS와 연결된다.</li>
+<li>Slave 수에 상관없이 한 순간에는 하나의 slave만 master와 통시할 수 있다.(모두 활성화 되면 MISO에서 서로 다른 데이터가 충돌이 발생할 수 있다.)</li>
+<li>선택되지 않은 SLAVE는 CS로 High 값을 받아 MISO 출력을 Hi-Z상태로 만든다.(외부 통신에 영향을 주지 않는ㄷ나.) 또한, master의 SCLK, MOSI 신호는 무시한다.</li>
+</ul>
+<h2 id="spi의-장점">SPI의 장점</h2>
+<ul>
+<li>최고 70㎒에 이르는 빠른 통신 속도와 양방향 통신 가능</li>
+<li>전송 데이터 단위에 제약이 없다. 8, 16, 24bit 등 원하는 길이를 한 워드로 설정 가능</li>
+<li>데이터의 bit 전송 순서가 상관업사.ㄷ MSB 또는 LSB부터 전송해도 상관 없다.</li>
+<li>I<sup>2</sup>C와 달리 slave가 자체 주소를 가지고 있지 않으므로 주소 충돌의 문제가 발생하지 않든다.</li>
+</ul>
+<h2 id="spi의-단점">SPI의 단점</h2>
+<ul>
+<li>I<sup>2</sup>C와 달리 SPI 버스에는 한 개의 버스 master만 (라인이 연결 되어 있더라도 통신시에는 하나만) 있을 수 있다.</li>
+<li>I<sup>2</sup>C에 비해 필요ㅕ한 핀의 수가 많다. CS핀의 수 역시 slave 수에 비례하여 늘어난다.</li>
+<li>I<sup>2</sup>C의 ACK와 같은 메커니즘이 없어서 master가 자신이 통신하고 있는 장치가 실제로 존재하는 여부를 알 수 없다.</li>
+</ul>
+
 
 
             </div>
