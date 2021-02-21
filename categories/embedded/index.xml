@@ -6,7 +6,16 @@
     <description>Recent content in Embedded on Do Do Do</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language>
-    <lastBuildDate>Sat, 20 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://threedo29.github.io/categories/embedded/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://threedo29.github.io/categories/embedded/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>동기식 시리얼 통신 프로토콜1</title>
+      <link>https://threedo29.github.io/posts/synchronous-serial-protocol1/</link>
+      <pubDate>Sun, 21 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://threedo29.github.io/posts/synchronous-serial-protocol1/</guid>
+      <description>동기식 시리얼 통신 프로토콜 ① - SPI 동기식 시리얼 통신 사용 효과 비동기식 시리얼 통신의 주요 문제점 : 비동기식 시리얼 통신은 clock 신호를 사용하지 않기 때문에 통신 장치 간의 baud rate mismatch를 방지하기 위해서 데이터 패킷에 동기화 비트를 추가하게 된다. → 결국 1byte를 전송할 때마다 start/stop bit가 생성되고 전송시 마다 sync를 맞춰야 하므로 오</description>
+    </item>
+    
     <item>
       <title>비동기식 시리얼 프로토콜</title>
       <link>https://threedo29.github.io/posts/asynchronous-serial-protocol/</link>
