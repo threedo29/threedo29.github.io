@@ -40,7 +40,7 @@
     
     
 
-    <title>시리얼 인터페이스의 종류</title>
+    <title>동기식 시리얼 통신 프로토콜2</title>
 
 </head>
 
@@ -176,12 +176,12 @@
             <div class = "content">
             
 
-<title>시리얼 인터페이스의 종류</title>
+<title>동기식 시리얼 통신 프로토콜2</title>
 
-<h1>시리얼 인터페이스의 종류</h1>
+<h1>동기식 시리얼 통신 프로토콜2</h1>
 <aside>
     <p style="text-align: right;">
-        2
+        5
 
     
     
@@ -189,7 +189,7 @@
             
     </span>
     
-    작성일: 2021-02-19&nbsp;<br>
+    작성일: 2021-02-22&nbsp;<br>
     작성자: 양성재 &nbsp;
 </p>
 </aside>
@@ -198,37 +198,91 @@
     <b>목차</b>
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#동기식synchronous-시리얼-인터페이스">동기식(Synchronous) 시리얼 인터페이스</a></li>
-    <li><a href="#비동기식asynchronous-시리얼-인터페이스">비동기식(Asynchronous) 시리얼 인터페이스</a></li>
+    <li><a href="#isup2supc-하드웨어-구성">I<sup>2</sup>C 하드웨어 구성</a></li>
+    <li><a href="#isup2supc-패킷-기본구조">I<sup>2</sup>C 패킷 기본구조</a></li>
+    <li><a href="#통신-시작-조건">통신 시작 조건</a></li>
+    <li><a href="#주소-프레임-address-frame">주소 프레임 (Address Frame)</a></li>
+    <li><a href="#데이터-프레임-data-frame">데이터 프레임 (Data Frame)</a></li>
+    <li><a href="#통신-종료-조건">통신 종료 조건</a></li>
+    <li><a href="#isup2supc의-장점">I<sup>2</sup>C의 장점</a></li>
+    <li><a href="#isup2supc의-단점">I<sup>2</sup>C의 단점</a></li>
   </ul>
 </nav>
 </aside>
 
-<h1 id="시리얼-인터페이스의-종류-동기식비동기식">시리얼 인터페이스의 종류 (동기식/비동기식)</h1>
-<h2 id="동기식synchronous-시리얼-인터페이스">동기식(Synchronous) 시리얼 인터페이스</h2>
+<h1 id="동기식-시리얼-통신-프로토콜----isup2supc">동기식 시리얼 통신 프로토콜 ② - I<sup>2</sup>C</h1>
+<h2 id="isup2supc-하드웨어-구성">I<sup>2</sup>C 하드웨어 구성</h2>
 <ul>
-<li>데이터 라인(Data Line)의 동작을 클럭 시그널(Clock Signal)의 동작과 동기화(같은 타이밍에 동작)시킨다.</li>
-<li>시리얼 버스에 함께 연결된 장치들이 이 클럭 신호를 공유하게 되어 모두 신호에 맞춰 동작하게 된다. (두 대의 송수신 시스템이 통신과정에서 시차가 달라 데이터를 잘못 해석할 가능성을 방지)</li>
-<li><u>통신에 관여하는 주체들 간에 주종 관계가 존재</u> (<strong><code>master</code></strong> : 통신의 주도권을 가지는 주체, <strong><code>slave</code></strong> : 통신에서 종속적인 주체) 따라서 master가 출력하는 클럭 신호에만 반응할 수 있으므로 송수신과 상관 없이 master가 통신을 주도 (보통 프로세서 : master, 주변장치 : slave)</li>
-<li>장점 : 직관적이다, 전송효율과 전송속도가 높다.</li>
-<li>단점 : 클럭 신호를 위한 하나의 라인을 더 필요로 한다.</li>
+<li>I<sup>2</sup>C(Inter-Integrated Circuit) 버스는 MCU와 저속 주변 장치 사이의 통신을 위한 용도로 개발된 규격</li>
+<li>두 가닥의 선을 사용하므로 TWI(Two Wire Interface)라고 불리기도 한다. (특허권 등의 이유 때문인지 Philips 이외의 회사들은 거의 대부분 TWI라고 부른다.)</li>
 </ul>
-<h2 id="비동기식asynchronous-시리얼-인터페이스">비동기식(Asynchronous) 시리얼 인터페이스</h2>
+<p><img src="i2c.png#center" alt="i2c"><strong>그림 1 I<sup>2</sup>C 통신 연결</strong></p>
 <ul>
-<li>데이터가 외부 클럭 시그널(external clock signal)의 도움 없이 동작하는 것을 의미</li>
-<li>대신 클럭 신호 없이 데이터를 안정적으로 전송, 수신할 수 있는 방법이 추가된다.<br>
-→ 하나의 글자를 나타내는 코드의 전후에 <strong><code>start bit</code></strong> 와 <strong><code>stop bit</code></strong> 를 넣어 블록의 동기화를 취해준다.</li>
-<li>일반적으로 시리얼 통신이라 부르는 것들 대부분 비동기 시리얼 통신을 사용</li>
-<li>장점 :
-<ol>
-<li>비동기 통신은 클럭 신호를 위한 라인을 필요로 하지 않는다.</li>
-<li>송신용 선과 수신용 선 두 가닥만 존재하여 두 주체가 동시에 데이터를 주고 받는 양방향 통신인 <u><strong><code>전이중(full duplex)통신</code></strong> 이 가능하다.</u></li>
-<li>통신에 참여하는 두 주체가 서로 대등한 관계에서 일대일 통신 : <u>양쪽 모두 원하는 때에 <strong>언제든지</strong> 데이터를 보낼 수 있다.</u></li>
-</ol>
-</li>
-<li>단점 : 추가된 <code>start bit</code>와 <code>stop bit</code>로 인해 필요한 데이터만 <u>연속적으로 보낼 수 없고</u> 적어도 10bit 이상 길이의 패킷을 전송해야 하므로 효율이 떨어진다.</li>
+<li>I<sup>2</sup>C 버스는 양방향 Open Drain 선인 SCL(Serial Clock)과 SDA(Serial Data)로 이루어져 있다.</li>
+<li>SCL과 SDA선은 모두 Open Drain 이므로 각각에 풀업 저항을 연결해 주어야 한다.</li>
+<li>Master-Slave 관계로 통신한다.(master도 2개 이상으로 연결될 수 있으므로 <u>N : N 통신 가능</u>)</li>
+<li>Master가 생성하는 SCL을 기준으로 데이터를 송수신한다.</li>
+<li>SDA 하나의 선을 통해 데이터를 주고 받으므로 반이중(Half Duplex) 통신만 가능하다. (데이터 전송 순간에는 반드시 하나의 master와 하나의 slave 만이 데이터를 주고 받을 수 있다.)</li>
 </ul>
-<p><img src="compare_table.png#center" alt="compare_table"><strong>표 1 동기식 전송과 비동기식 전송 비교</strong></p>
+<blockquote>
+<p>Slave 주소</p>
+<ul>
+<li>모든 master와 slave가 SCL, SDA 라인을 공유하므로 slave를 개별적으로 지정하기 위한 방법</li>
+<li>모든 slave 장치들은 7bit의 고유한 주소를 갖는다. (최대 128개 slave 연결 가능)</li>
+</ul>
+</blockquote>
+<ul>
+<li>Master가 다수인 경우 : 현재 통신을 진행하고 있는 master가 버스 소유권을 가진다.</li>
+<li>해당 master와 그와 통신을 진행중인 slave 둘 이외의 장치는 통신을 방해하지 않아야 한다.</li>
+</ul>
+<blockquote>
+<p><u>Open Drain</u> 연결의 의미</p>
+<ul>
+<li>연결된 장치 하나가 데이터 전송을 위해 Low 신호를 넣고 있으면 다른 장치들은 이것을 강제로 High로 바꿀 수 없다는 것</li>
+<li>반대로 통신에 참여하지 않는 장치가 SCL이나 SDA로 Low 신호를 출력하면 master가 정상적으로 통신을 진행할 수 없다. → 통신 참여하지 않는 장치는 출력을 floating 상태로 유지해야 한다.</li>
+<li>외부 풀업 저항으로 인해 통신 라인 사용이 끝나면 자동으로 High 상태로 복귀한다.</li>
+<li>별도의 Level Shifter 회로가 필요하지 않다.</li>
+</ul>
+</blockquote>
+<h2 id="isup2supc-패킷-기본구조">I<sup>2</sup>C 패킷 기본구조</h2>
+<p><img src="i2c_packet.png#center" alt="i2c_packet"><strong>그림 2 I<sup>2</sup>C 통신 패킷 기본 구조</strong></p>
+<ul>
+<li>I<sup>2</sup>C가 전송하는 메시지는 2개의 프레임으로 주소(Address) 프레임과 데이터(Data) 프레임으로 구성된다.</li>
+</ul>
+<h2 id="통신-시작-조건">통신 시작 조건</h2>
+<ul>
+<li>먼저 데이터가 전송되는 slave를 정하기 위해 주소 프레임부터 전송해야 한다.</li>
+<li>이를 위해 master는 SCL 라인을 High, SDA 라인을 Low로 변경한다. → <u>모든 slave 장치들에게 데이터를 전송할 준비가 되었다는 신호</u></li>
+<li>여러 개의 master가 연결되어 있다면 SDA 라인을 Low로 잡는 것이 제어권을 갖는다.</li>
+</ul>
+<h2 id="주소-프레임-address-frame">주소 프레임 (Address Frame)</h2>
+<ul>
+<li>모든 통신 데이터 앞에 위치</li>
+<li>SDA로 처음 수신되는 1byte 중 앞선 7bit 데이터(MSB 순서)가 주소를 의미한다.</li>
+<li>마지막 1bit(8번째 bit) 읽기(read, 1, 데이터 요청) 또는 쓰기(write, 0, 데이터 전송) 동작을 표시한다.</li>
+<li>9번째 bit는 ACK/NACK : 데이터 전송의 성공/실패를 알리는 신호로 master가 전송한 주소 정보(8bit)에 해당하는 장치가 만들어 줘야하는 신호. <u>주소 프레임, 데이터 프레임 각각 끝에</u> 항상 붙는다.<u>(ACK : 1, 정상, NACK : 0, 비정상)</u></li>
+</ul>
+<h2 id="데이터-프레임-data-frame">데이터 프레임 (Data Frame)</h2>
+<ul>
+<li>주소 프레임의 전송이 완료된 후 데이터 프레임 전송 시작</li>
+<li>Read, Write를 나타내는 주소 프레임의 bit에 따라 master 또는 slave가 사용한다.</li>
+</ul>
+<h2 id="통신-종료-조건">통신 종료 조건</h2>
+<ul>
+<li>종료 신호 : SCL을 Low에서 High 상태로 바꾼 후 SDA 라인을 Low에서 High로 변경한다.</li>
+<li>SCL이 High인 상태에서 SDA 라인의 상태를 변경해서는 안된다.</li>
+</ul>
+<h2 id="isup2supc의-장점">I<sup>2</sup>C의 장점</h2>
+<ul>
+<li>Slave 수에 관계 없이 두 라인만으로 양방향 통신이 가능하다.</li>
+<li>두 개 이상의 master를 연결할 수 있다.</li>
+</ul>
+<h2 id="isup2supc의-단점">I<sup>2</sup>C의 단점</h2>
+<ul>
+<li>Open Drain 구조 기반으로 인해 동시 양방향 통신(Full Duplex)이 불가능</li>
+<li>SPI에 비하면 <u>매우 낮은 속도</u>이므로 저속 주변장치와의 통신, 주변 장치의 동작 모드 설정 등의 용도로 사용</li>
+<li>Slave 주소가 7bit로 길이가 제한되어 있어 slave들의 주소가 충돌할 가능성 존재</li>
+</ul>
 
 
 

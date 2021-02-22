@@ -6,7 +6,16 @@
     <description>Recent content in Embedded on Do Do Do</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language>
-    <lastBuildDate>Sun, 21 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://threedo29.github.io/categories/embedded/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://threedo29.github.io/categories/embedded/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>동기식 시리얼 통신 프로토콜2</title>
+      <link>https://threedo29.github.io/posts/synchronous-serial-protocol2/</link>
+      <pubDate>Mon, 22 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://threedo29.github.io/posts/synchronous-serial-protocol2/</guid>
+      <description>동기식 시리얼 통신 프로토콜 ② - I2C I2C 하드웨어 구성 I2C(Inter-Integrated Circuit) 버스는 MCU와 저속 주변 장치 사이의 통신을 위한 용도로 개발된 규격 두 가닥의 선을 사용하므로 TWI(Two Wire Interface)라고 불리기도 한다. (특허권 등의 이유 때문인지 Philips 이외의 회사들은 거의 대부분 TWI라고 부른다.) 그림 1 I2C 통신 연결 I2C 버스는 양방향 Open Drain 선인 SCL(Serial Clock)과 SDA(Serial Da</description>
+    </item>
+    
     <item>
       <title>동기식 시리얼 통신 프로토콜1</title>
       <link>https://threedo29.github.io/posts/synchronous-serial-protocol1/</link>
